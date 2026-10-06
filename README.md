@@ -115,28 +115,16 @@ Caroline da Rosa Wibelinger,
 Nicole Penz, 
 Poliana Pautz Müller
 
-## Estrutura do projeto
+## Instruções para reprodução
 
-```text
-trabalho-microbenchmark/
-│
-├── README.md
-│
-├── codigo/
-│   └── microbenchmark.py
-│
-├── dados/
-│   ├── windows/
-│   │   └── resultados_windows.csv
-│   └── linux/
-│       └── resultados_linux.csv
-│
-├── analise/
-│   └── analise.py
-│
-├── resultados/
-│   ├── tabelas/
-│   └── graficos/
-│
-└── configuracoes/
-    └── ambientes.md
+Para reproduzir o experimento, é necessário configurar os dois ambientes virtuais com as mesmas condições definidas neste projeto.
+
+1. Configurar uma máquina virtual com Windows e outra com Linux, utilizando 2 vCPUs e 3 GB de RAM em cada ambiente.
+2. Instalar o Python 3.13.14 nos dois sistemas.
+3. Utilizar a mesma versão do código do microbenchmark disponível na pasta `codigo/`.
+4. Executar o microbenchmark no Windows e no Linux, seguindo a ordem definida no protocolo: Windows primeiro e Linux depois.
+5. Realizar os testes com blocos de 100 MB a 1000 MB, aumentando 100 MB por vez, com 100 repetições para cada tamanho.
+6. Salvar os resultados de cada sistema em arquivos CSV, utilizando o formato definido no projeto.
+7. Armazenar os resultados do Windows em `dados/windows/` e os resultados do Linux em `dados/linux/`.
+8. Executar o código de análise disponível na pasta `analise/` para validar e comparar os resultados.
+9. Os resultados das tabelas e dos gráficos devem ser armazenados nas respectivas pastas em `resultados/`.
