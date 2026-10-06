@@ -28,8 +28,8 @@ O experimento será realizado utilizando duas máquinas virtuais no mesmo comput
 
 | Configuração | Windows | Linux |
 |---|---|---|
-| Sistema operacional | Windows 10 | A definir |
-| Versão | A definir | A definir |
+| Sistema operacional | Windows 10 | Ubuntu |
+| Versão | 10.0.19045 | 24.04.5 LTS (Noble Numbat) |
 | Arquitetura | 64 bits | 64 bits |
 | vCPUs | 2 | 2 |
 | Memória RAM | 3 GB | 3 GB |
