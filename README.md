@@ -24,17 +24,17 @@ O experimento será realizado utilizando duas máquinas virtuais no mesmo comput
 - Memória RAM: 8 GB
 - Armazenamento: 238 GB
 
-### Máquinas virtuais
+### Configuração das máquinas virtuais
 
 | Configuração | Windows | Linux |
 |---|---|---|
+| Sistema operacional | Windows 10 | A definir |
+| Versão | A definir | A definir |
 | Arquitetura | 64 bits | 64 bits |
 | vCPUs | 2 | 2 |
-| RAM | 3 GB | 3 GB |
-| VirtualBox | 7.2.8 | 7.2.8 |
+| Memória RAM | 3 GB | 3 GB |
 | Python | 3.13.14 | 3.13.14 |
-
-A versão do Linux será definida antes da coleta dos dados.
+| VirtualBox | 7.2.8 | 7.2.8 |
 
 ## Operações avaliadas
 
