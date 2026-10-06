@@ -109,23 +109,34 @@ Será considerado que um sistema apresentou melhor desempenho quando apresentar 
 
 Caso os resultados sejam diferentes entre operações ou tamanhos de bloco, a análise considerará cada situação individualmente, evitando basear a conclusão em apenas um resultado.
 
+## Integrantes
+Camila Monteiro Mendes Rodrigues, 
+Caroline da Rosa Wibelinger, 
+Nicole Penz, 
+Poliana Pautz Müller
+
 ## Estrutura do projeto
 
+```text
 trabalho-microbenchmark/
 │
 ├── README.md
+│
 ├── codigo/
+│   └── microbenchmark.py
+│
 ├── dados/
 │   ├── windows/
+│   │   └── resultados_windows.csv
 │   └── linux/
+│       └── resultados_linux.csv
+│
 ├── analise/
+│   └── analise.py
+│
 ├── resultados/
 │   ├── tabelas/
 │   └── graficos/
+│
 └── configuracoes/
-
-## Integrantes
-Camila Monteiro Mendes Rodrigues
-Caroline da Rosa Wibelinger
-Nicole Penz
-Poliana Pautz Müller
+    └── ambientes.md
