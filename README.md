@@ -74,7 +74,6 @@ Os resultados do Linux serão armazenados em:
 
 O formato dos arquivos CSV será:
 
-```text
 bloco_MB,teste,alloc_ms,write_ms,read_ms,free_ms
 
 ## Validação dos dados
