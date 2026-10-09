@@ -1,6 +1,6 @@
 # Microbenchmark: Windows x Linux
 
-Experimento para comparar o desempenho de operações de memória entre Windows e Linux em condições experimentais equivalentes.
+Experimento para comparar o desempenho de operações de memória entre Windows e Linux, utilizando máquinas virtuais com configurações equivalentes.
 
 ## Objetivo
 
@@ -12,119 +12,91 @@ Em condições experimentais equivalentes, qual dos sistemas operacionais aprese
 
 ## Hipótese
 
-A hipótese do grupo é que o Linux apresentará menor tempo de execução nas operações de memória em comparação com o Windows, considerando as mesmas condições de hardware, código, tamanho dos blocos e número de repetições.
+A hipótese inicial do grupo foi que o Linux apresentaria menores tempos de execução nas operações de memória em comparação com o Windows, considerando as mesmas condições de hardware, código, tamanho dos blocos e número de repetições.
 
 ## Configuração experimental
 
-O experimento será realizado utilizando duas máquinas virtuais no mesmo computador físico, mantendo as configurações das máquinas virtuais equivalentes.
+O experimento foi realizado em duas máquinas virtuais no mesmo computador físico, utilizando configurações equivalentes.
 
 ### Hardware físico
 
-- Processador: Intel(R) Core(TM) i5-103G1 CPU @ 1.00GHz
-- Memória RAM: 8 GB
-- Armazenamento: 238 GB
+* Processador: Intel(R) Core(TM) i5-103G1 CPU @ 1.00GHz
+* Memória RAM: 8 GB
+* Armazenamento: 238 GB
 
 ### Configuração das máquinas virtuais
 
-| Configuração | Windows | Linux |
-|---|---|---|
-| Sistema operacional | Windows 10 | Ubuntu |
-| Versão | 10.0.19045 | 24.04.5 LTS (Noble Numbat) |
-| Arquitetura | 64 bits | 64 bits |
-| vCPUs | 2 | 2 |
-| Memória RAM | 3 GB | 3 GB |
-| Python | 3.13.14 | 3.13.14 |
-| VirtualBox | 7.2.20 | 7.2.20 |
+| Configuração        | Windows    | Linux       |
+| ------------------- | ---------- | ----------- |
+| Sistema operacional | Windows 10 | Ubuntu      |
+| Versão              | 10.0.19045 | 24.04.5 LTS |
+| Arquitetura         | 64 bits    | 64 bits     |
+| vCPUs               | 2          | 2           |
+| Memória RAM         | 3 GB       | 3 GB        |
+| Python              | 3.13.14    | 3.13.14     |
+| VirtualBox          | 7.2.20     | 7.2.20      |
 
 ## Operações avaliadas
 
-As operações serão executadas na seguinte ordem:
+Em cada repetição, foram realizadas as seguintes operações, nesta ordem:
 
-1. Alocação
-2. Escrita
-3. Leitura
-4. Liberação
+1. Alocação de memória.
+2. Escrita de dados.
+3. Leitura dos dados.
+4. Liberação da memória.
 
 ## Protocolo experimental
 
-Serão utilizados blocos de memória de 100 MB a 1000 MB, com incremento de 100 MB.
+Foram utilizados blocos de memória de 100 MB a 1000 MB, com incrementos de 100 MB. Cada tamanho foi testado 100 vezes em cada sistema operacional, totalizando 1000 registros por sistema e 2000 registros no conjunto completo.
 
-Cada tamanho de bloco será executado 100 vezes em cada sistema operacional.
+O mesmo código do microbenchmark foi utilizado nos dois ambientes. Na escrita, foi utilizado um padrão de dados de 1 MB repetido até preencher o bloco, evitando a criação de uma segunda estrutura de memória muito grande.
 
-Os tempos serão registrados em milissegundos e armazenados em arquivos CSV.
+Os tempos foram medidos com `perf_counter_ns()` e convertidos para milissegundos. Os resultados foram registrados em arquivos CSV separados para Windows e Linux.
 
-O mesmo código do microbenchmark será utilizado nos dois sistemas.
-
-A execução será realizada com apenas um ambiente em funcionamento por vez, e aplicações desnecessárias serão fechadas antes dos testes.
-
-A ordem de execução definida no protocolo é:
-
-1. Windows
-2. Linux
+Os testes foram executados em um ambiente por vez, mantendo as configurações das máquinas virtuais equivalentes e fechando aplicações desnecessárias sempre que possível.
 
 ## Dados coletados
 
-Os resultados do Windows serão armazenados em:
+Os arquivos originais gerados pelo experimento foram:
 
-`dados/windows/`
+* `resultados_windows.csv`
+* `resultados_linux.csv`
 
-Os resultados do Linux serão armazenados em:
+O formato utilizado foi:
 
-`dados/linux/`
+`bloco_MB,teste,alloc_ms,write_ms,read_ms,free_ms`
 
-O formato dos arquivos CSV será:
-
-bloco_MB,teste,alloc_ms,write_ms,read_ms,free_ms
+Após a coleta, os dados foram reunidos em um arquivo processado, preservando os arquivos originais.
 
 ## Validação dos dados
 
-Cada sistema deverá possuir 1.000 registros.
+Os arquivos foram conferidos quanto à quantidade de registros, aos tamanhos dos blocos, ao número de repetições, à presença de valores ausentes ou duplicados, aos tipos dos dados e à existência de tempos negativos.
 
-Serão verificados:
-
-quantidade de registros;
-tamanhos dos blocos;
-número dos testes;
-duplicidades;
-valores ausentes;
-tipos dos dados;
-valores negativos;
-identificação correta do sistema.
+Cada sistema apresentou 1000 registros válidos, totalizando 2000 registros no arquivo combinado.
 
 ## Análise
 
-Os registros serão agrupados por sistema operacional, tamanho do bloco e operação.
+Os dados foram agrupados por sistema operacional, tamanho do bloco e operação. Para cada grupo, foram calculados a média e o desvio padrão dos tempos.
 
-Para cada grupo serão calculados:
-
-tempo médio;
-mediana;
-desvio padrão.
-
-Os resultados serão apresentados por meio de tabelas e gráficos comparando Windows e Linux para cada tamanho de bloco e operação.
+Os resultados foram organizados em uma tabela estatística e em quatro gráficos, um para cada operação, permitindo comparar os tempos médios do Windows e do Linux nos diferentes tamanhos de bloco.
 
 ## Critério de desempenho
 
-Será considerado que um sistema apresentou melhor desempenho quando apresentar menor tempo médio para realizar as operações de memória nas mesmas condições experimentais.
-
-Caso os resultados sejam diferentes entre operações ou tamanhos de bloco, a análise considerará cada situação individualmente, evitando basear a conclusão em apenas um resultado.
+Foi considerado melhor o desempenho do sistema que apresentou menor tempo médio para realizar determinada operação nas mesmas condições experimentais. Quando os resultados variaram entre operações ou tamanhos de bloco, cada situação foi analisada separadamente.
 
 ## Integrantes
-Camila Monteiro Mendes Rodrigues, 
-Caroline da Rosa Wibelinger, 
-Nicole Penz, 
-Poliana Pautz Müller
+
+Camila Monteiro Mendes Rodrigues, Caroline da Rosa Wibelinger, Nicole Penz e Poliana Pautz Müller.
 
 ## Instruções para reprodução
 
-Para reproduzir o experimento, é necessário configurar os dois ambientes virtuais com as mesmas condições definidas neste projeto.
+Para reproduzir o experimento:
 
-1. Configurar uma máquina virtual com Windows e outra com Linux, utilizando 2 vCPUs e 3 GB de RAM em cada ambiente.
+1. Configurar duas máquinas virtuais no VirtualBox, uma com Windows e outra com Linux, ambas com 2 vCPUs e 3 GB de RAM.
 2. Instalar o Python 3.13.14 nos dois sistemas.
-3. Utilizar a mesma versão do código do microbenchmark disponível na pasta `codigo/`.
-4. Executar o microbenchmark no Windows e no Linux, seguindo a ordem definida no protocolo: Windows primeiro e Linux depois.
-5. Realizar os testes com blocos de 100 MB a 1000 MB, aumentando 100 MB por vez, com 100 repetições para cada tamanho.
-6. Salvar os resultados de cada sistema em arquivos CSV, utilizando o formato definido no projeto.
-7. Armazenar os resultados do Windows em `dados/windows/` e os resultados do Linux em `dados/linux/`.
-8. Executar o código de análise disponível na pasta `analise/` para validar e comparar os resultados.
-9. Os resultados das tabelas e dos gráficos devem ser armazenados nas respectivas pastas em `resultados/`.
+3. Utilizar a mesma versão do código do microbenchmark nos dois ambientes.
+4. Executar o programa separadamente em cada sistema operacional.
+5. Realizar 100 repetições para cada tamanho de bloco, de 100 MB a 1000 MB.
+6. Salvar os resultados de cada sistema em arquivos CSV separados, seguindo o formato definido neste projeto.
+7. Executar o código de processamento para validar, reunir e analisar os resultados.
+8. Gerar a tabela estatística e os gráficos para comparar os sistemas operacionais.
