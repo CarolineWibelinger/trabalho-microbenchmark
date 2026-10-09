@@ -34,7 +34,7 @@ O experimento será realizado utilizando duas máquinas virtuais no mesmo comput
 | vCPUs | 2 | 2 |
 | Memória RAM | 3 GB | 3 GB |
 | Python | 3.13.14 | 3.13.14 |
-| VirtualBox | 7.2.8 | 7.2.8 |
+| VirtualBox | 7.2.20 | 7.2.20 |
 
 ## Operações avaliadas
 
